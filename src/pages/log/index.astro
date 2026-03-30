@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('log'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Base title="Build Log — Tiger × Rune" description="The unfiltered build log of Tiger × Rune">
+  <Nav />
+  
+  <main class="pt-24 pb-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <h1 class="font-display text-4xl md:text-5xl text-rune-gold mb-4">Build Log</h1>
+      <p class="font-body text-rune-muted mb-16">
+        No schedule. No filler. Just the stories worth telling.
+      </p>
+      
+      <div class="space-y-8">
+        {posts.map(post => (
+          <a href={`/log/${post.id}`} class="block group">
+            <article class="bg-rune-surface rounded-xl border border-rune-border p-8 hover:border-rune-gold/30 transition-colors">
+              <div class="flex items-baseline justify-between mb-3">
+                <time class="font-mono text-xs text-rune-muted">{post.data.date}</time>
+                {post.data.mood && (
+                  <span class="font-mono text-xs text-rune-gold/40">// {post.data.mood}</span>
+                )}
+              </div>
+              <h3 class="font-display text-2xl text-rune-text mb-3 group-hover:text-rune-gold transition-colors">
+                {post.data.title}
+              </h3>
+              <p class="font-body text-rune-muted leading-relaxed">
+                {post.data.summary}
+              </p>
+              {post.data.tags && (
+                <div class="flex gap-2 mt-4">
+                  {post.data.tags.map(tag => (
+                    <span class="text-xs font-mono text-rune-warm/50 bg-rune-bg px-2 py-0.5 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          </a>
+        ))}
+      </div>
+      
+      {posts.length === 0 && (
+        <p class="font-body text-rune-muted/50 text-center py-16">
+          Nothing here yet. Check back when something interesting happens.
+        </p>
+      )}
+    </div>
+  </main>
+  
+  <Footer />
+</Base>

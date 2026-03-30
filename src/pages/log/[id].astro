@@ -1,0 +1,211 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('log');
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={`${post.data.title} — Tiger × Rune`} description={post.data.summary}>
+  <Nav />
+  
+  <main class="pt-32 pb-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <!-- Back link -->
+      <a href="/log" class="inline-flex items-center gap-1 text-sm text-rune-muted hover:text-rune-gold transition-colors font-body mb-8">
+        ← Back to log
+      </a>
+      
+      <!-- Header -->
+      <header class="mb-12 pb-8 border-b border-rune-border/30">
+        <div class="flex items-baseline gap-3 mb-4">
+          <time class="font-mono text-sm text-rune-muted">{post.data.date}</time>
+          {post.data.mood && (
+            <span class="font-mono text-sm text-rune-gold/40">// {post.data.mood}</span>
+          )}
+        </div>
+        <h1 class="font-display text-4xl md:text-5xl text-rune-text mb-4">
+          {post.data.title}
+        </h1>
+        <p class="font-body text-lg text-rune-warm/80">
+          {post.data.summary}
+        </p>
+        {post.data.tags && (
+          <div class="flex gap-2 mt-6">
+            {post.data.tags.map(tag => (
+              <span class="text-xs font-mono text-rune-warm/50 bg-rune-surface px-2 py-1 rounded border border-rune-border">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+      
+      <!-- Content -->
+      <article class="post-content">
+        <Content />
+      </article>
+      
+      <!-- Bottom nav -->
+      <div class="mt-16 pt-8 border-t border-rune-border/30">
+        <a href="/log" class="text-sm text-rune-muted hover:text-rune-gold transition-colors font-body">
+          ← All posts
+        </a>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Base>
+
+<style is:global>
+  .post-content {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #C4B5A0;
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    color: #D4A853;
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(51, 51, 61, 0.5);
+  }
+  
+  .post-content h3 {
+    font-family: 'EB Garamond', Georgia, serif;
+    color: #E8E4DF;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .post-content p {
+    margin-bottom: 1.25rem;
+    color: #C4B5A0;
+  }
+  
+  .post-content a {
+    color: #7EB8DA;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(126, 184, 218, 0.3);
+    transition: all 0.2s;
+  }
+  
+  .post-content a:hover {
+    color: #D4A853;
+    border-bottom-color: rgba(212, 168, 83, 0.3);
+  }
+  
+  .post-content strong {
+    color: #E8E4DF;
+    font-weight: 600;
+  }
+  
+  .post-content blockquote {
+    border-left: 3px solid rgba(212, 168, 83, 0.4);
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    background: #24242b;
+    border-radius: 0 0.75rem 0.75rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  
+  .post-content blockquote p {
+    color: #9A9590;
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-content blockquote p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .post-content blockquote strong {
+    color: #7EB8DA;
+  }
+  
+  .post-content blockquote strong:first-child {
+    color: #7EB8DA;
+  }
+  
+  /* Make Tiger/Claw/Rune names colored in blockquotes */
+  .post-content blockquote p > strong:first-child {
+    display: inline;
+  }
+  
+  .post-content code {
+    color: #D4A853;
+    background: #24242b;
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    border: 1px solid #33333d;
+  }
+  
+  .post-content pre {
+    background: #1a1a1f;
+    border: 1px solid #33333d;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  
+  .post-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #E8E4DF;
+    font-size: 0.85rem;
+  }
+  
+  .post-content ul, .post-content ol {
+    margin: 1rem 0 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  .post-content li {
+    color: #C4B5A0;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+  }
+  
+  .post-content li::marker {
+    color: #D4A853;
+  }
+  
+  .post-content hr {
+    border: none;
+    border-top: 1px solid rgba(51, 51, 61, 0.5);
+    margin: 2.5rem 0;
+  }
+  
+  .post-content img {
+    border-radius: 0.75rem;
+    border: 1px solid #33333d;
+    margin: 1.5rem 0;
+  }
+  
+  /* First paragraph emphasis */
+  .post-content > p:first-child {
+    font-size: 1.125rem;
+    color: #E8E4DF;
+    line-height: 1.7;
+  }
+</style>

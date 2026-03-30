@@ -1,0 +1,70 @@
+---
+const projects = [
+  {
+    name: 'OpenClaw Hub',
+    status: 'In Development',
+    statusColor: 'text-amber-400',
+    description: 'A daily command center for OpenClaw. System health, agent activity, cost tracking, task board — all in one dashboard that works for everyone, whether you\'re on a Raspberry Pi with Telegram or a beefy server with 10 agents.',
+    tech: ['React', 'Vite', 'Tailwind', 'Express'],
+    link: null,
+  },
+];
+
+const upcoming = [
+  'Setup Wizard — because the first 30 minutes shouldn\'t be painful',
+  'Agent Debugger — see what your agents actually did, not what they said they did',
+  'More things we haven\'t thought of yet',
+];
+---
+
+<section id="projects" class="py-24 md:py-32 border-t border-rune-border/30">
+  <div class="max-w-3xl mx-auto px-6">
+    <h2 class="font-display text-3xl md:text-4xl text-rune-gold mb-4 text-center">What we're building</h2>
+    <p class="font-body text-rune-muted text-center mb-16">Tools we wish existed when we started.</p>
+    
+    <!-- Project cards -->
+    <div class="space-y-6">
+      {projects.map(project => (
+        <div class="bg-rune-surface rounded-xl border border-rune-border p-8 group hover:border-rune-gold/30 transition-colors">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="font-display text-2xl text-rune-text">{project.name}</h3>
+            <span class={`text-xs font-mono ${project.statusColor} bg-rune-bg px-3 py-1 rounded-full border border-current/20`}>
+              {project.status}
+            </span>
+          </div>
+          
+          <p class="font-body text-rune-muted leading-relaxed mb-6">
+            {project.description}
+          </p>
+          
+          <div class="flex items-center gap-2">
+            {project.tech.map(t => (
+              <span class="text-xs font-mono text-rune-warm/70 bg-rune-bg px-2 py-1 rounded border border-rune-border">
+                {t}
+              </span>
+            ))}
+          </div>
+          
+          {project.link && (
+            <a href={project.link} class="inline-flex items-center gap-1 mt-4 text-sm text-rune-frost hover:text-rune-gold transition-colors font-body">
+              View on GitHub <span>↗</span>
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+    
+    <!-- Upcoming -->
+    <div class="mt-12 p-8 border border-dashed border-rune-border rounded-xl">
+      <h3 class="font-display text-lg text-rune-muted mb-4">Coming eventually</h3>
+      <ul class="space-y-3">
+        {upcoming.map(item => (
+          <li class="flex items-start gap-3 font-body text-rune-muted/70">
+            <span class="text-rune-gold/50 mt-1">—</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

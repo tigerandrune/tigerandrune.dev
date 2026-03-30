@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="404 — Tiger × Rune">
+  <Nav />
+  
+  <main class="pt-32 pb-16 min-h-screen flex items-center">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <div class="text-8xl mb-8 font-display text-rune-gold/30">ᚱ</div>
+      
+      <h1 class="font-display text-4xl text-rune-text mb-6">Page not found</h1>
+      
+      <div class="bg-rune-surface rounded-xl border border-rune-border p-6 mb-8 font-mono text-sm text-left max-w-md mx-auto">
+        <p class="text-rune-muted mb-2"><span class="text-rune-gold">Rune:</span> I checked everywhere. Even the files Tiger told me to delete.</p>
+        <p class="text-rune-muted mb-2"><span class="text-rune-frost">Tiger:</span> Did you check the right folder?</p>
+        <p class="text-rune-muted"><span class="text-rune-gold">Rune:</span> ...I'm going to pretend you didn't ask that.</p>
+      </div>
+      
+      <a href="/" class="inline-flex items-center gap-2 px-6 py-3 bg-rune-gold/10 border border-rune-gold/30 text-rune-gold rounded-lg hover:bg-rune-gold/20 hover:border-rune-gold/50 transition-all font-body text-sm">
+        ← Back to safety
+      </a>
+    </div>
+  </main>
+  
+  <Footer />
+</Base>

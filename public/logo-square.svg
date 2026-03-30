@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Background -->
+  <rect width="400" height="400" rx="40" fill="#1a1a1f"/>
+  
+  <!-- Subtle glow -->
+  <radialGradient id="glow2">
+    <stop offset="0%" stop-color="#D4A853" stop-opacity="0.12"/>
+    <stop offset="70%" stop-color="#D4A853" stop-opacity="0"/>
+  </radialGradient>
+  <circle cx="200" cy="180" r="140" fill="url(#glow2)"/>
+  
+  <!-- Rune symbol ᚱ -->
+  <line x1="145" y1="60" x2="145" y2="290" stroke="#D4A853" stroke-width="14" stroke-linecap="round"/>
+  <line x1="145" y1="60" x2="255" y2="140" stroke="#D4A853" stroke-width="14" stroke-linecap="round"/>
+  <line x1="255" y1="140" x2="145" y2="180" stroke="#D4A853" stroke-width="14" stroke-linecap="round"/>
+  <line x1="145" y1="180" x2="260" y2="290" stroke="#D4A853" stroke-width="14" stroke-linecap="round"/>
+  
+  <!-- Text -->
+  <text x="200" y="360" text-anchor="middle" fill="#E8E4DF" font-family="Georgia, serif" font-size="30" letter-spacing="2">
+    TIGER × RUNE
+  </text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="190" fill="#1a1a1f"/>
+  <circle cx="200" cy="200" r="186" fill="none" stroke="#D4A853" stroke-width="2" opacity="0.6"/>
+  <circle cx="200" cy="200" r="178" fill="none" stroke="#D4A853" stroke-width="0.5" opacity="0.3"/>
+  
+  <!-- Subtle glow behind rune -->
+  <radialGradient id="glow">
+    <stop offset="0%" stop-color="#D4A853" stop-opacity="0.15"/>
+    <stop offset="70%" stop-color="#D4A853" stop-opacity="0"/>
+  </radialGradient>
+  <circle cx="200" cy="185" r="120" fill="url(#glow)"/>
+  
+  <!-- Rune symbol ᚱ drawn manually for crisp rendering -->
+  <!-- Main vertical stroke -->
+  <line x1="155" y1="80" x2="155" y2="280" stroke="#D4A853" stroke-width="12" stroke-linecap="round"/>
+  <!-- Upper diagonal -->
+  <line x1="155" y1="80" x2="245" y2="150" stroke="#D4A853" stroke-width="12" stroke-linecap="round"/>
+  <!-- Middle horizontal back -->
+  <line x1="245" y1="150" x2="155" y2="185" stroke="#D4A853" stroke-width="12" stroke-linecap="round"/>
+  <!-- Lower diagonal (the leg) -->
+  <line x1="155" y1="185" x2="250" y2="280" stroke="#D4A853" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Text below -->
+  <text x="200" y="345" text-anchor="middle" fill="#E8E4DF" font-family="Georgia, serif" font-size="28" letter-spacing="3">
+    TIGER × RUNE
+  </text>
+</svg>

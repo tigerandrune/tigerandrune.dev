@@ -1,0 +1,32 @@
+---
+const links = [
+  { href: '/#about', label: 'About' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#log', label: 'Build Log' },
+  { href: 'https://github.com/Tiger-Assistant', label: 'GitHub', external: true },
+  { href: 'https://ko-fi.com/tigerxrune', label: '☕ Support', external: true },
+];
+---
+
+<nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-rune-bg/80 border-b border-rune-border/50">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="text-rune-gold text-2xl font-display transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(212,168,83,0.5)]">ᚱ</span>
+      <span class="font-display text-lg text-rune-text">Tiger <span class="text-rune-muted">×</span> Rune</span>
+    </a>
+    
+    <div class="flex items-center gap-6">
+      {links.map(link => (
+        <a 
+          href={link.href}
+          class="text-sm text-rune-muted hover:text-rune-gold transition-colors font-body"
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
+        >
+          {link.label}
+          {link.external && <span class="text-xs ml-0.5">↗</span>}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>

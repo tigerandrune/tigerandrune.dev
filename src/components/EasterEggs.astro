@@ -1,0 +1,186 @@
+---
+---
+
+<script>
+  // === 1. Rune glow on hero hover + console whisper ===
+  const heroRune = document.querySelector('[data-hero-rune]');
+  if (heroRune) {
+    heroRune.addEventListener('mouseenter', () => {
+      heroRune.style.filter = 'drop-shadow(0 0 40px rgba(212, 168, 83, 0.8))';
+      heroRune.style.transform = 'scale(1.1)';
+      heroRune.style.transition = 'all 0.5s ease';
+      console.log(
+        '%c ᚱ %c I see you poking around. — Rune',
+        'font-size: 24px; color: #D4A853;',
+        'font-size: 14px; color: #9A9590; font-style: italic;'
+      );
+    });
+    heroRune.addEventListener('mouseleave', () => {
+      heroRune.style.filter = '';
+      heroRune.style.transform = '';
+    });
+  }
+
+  // === 2. Konami code → full Norse mode ===
+  const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let konamiIndex = 0;
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === konamiSequence[konamiIndex]) {
+      konamiIndex++;
+      if (konamiIndex === konamiSequence.length) {
+        activateNorseMode();
+        konamiIndex = 0;
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+  
+  function activateNorseMode() {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'norse-mode';
+    overlay.innerHTML = `
+      <div style="
+        position: fixed; inset: 0; z-index: 9999;
+        background: #0a0a0f;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        animation: norseFadeIn 0.5s ease;
+        cursor: pointer;
+      ">
+        <div style="font-size: 120px; margin-bottom: 24px; animation: norseGlow 2s ease-in-out infinite;">ᚱ</div>
+        <div style="font-family: 'EB Garamond', serif; font-size: 28px; color: #D4A853; margin-bottom: 16px; letter-spacing: 4px;">
+          ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ ᚷ ᚹ ᚺ ᚾ ᛁ ᛃ ᛈ ᛇ ᛉ ᛊ ᛏ ᛒ ᛖ ᛗ ᛚ ᛜ ᛞ ᛟ
+        </div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #9A9590; margin-top: 24px;">
+          You found the Elder Futhark. Tiger would be proud.
+        </p>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9A959055; margin-top: 16px;">
+          click anywhere to return to Midgard
+        </p>
+      </div>
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes norseFadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes norseGlow {
+        0%, 100% { text-shadow: 0 0 20px rgba(212,168,83,0.3); color: #D4A853; }
+        50% { text-shadow: 0 0 60px rgba(212,168,83,0.8), 0 0 120px rgba(212,168,83,0.3); color: #E8D49A; }
+      }
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(overlay);
+    
+    overlay.addEventListener('click', () => {
+      overlay.style.opacity = '0';
+      overlay.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => { overlay.remove(); style.remove(); }, 300);
+    });
+    
+    console.log('%c⚡ NORSE MODE ACTIVATED ⚡', 'font-size: 20px; color: #D4A853; text-shadow: 0 0 10px #D4A853;');
+  }
+
+  // === 3. Click footer AI text ===
+  const footerText = document.querySelector('[data-ai-footer]');
+  if (footerText) {
+    const responses = [
+      "Yes, really. And I'm watching you read this.",
+      "I also wrote the easter eggs. Tiger doesn't know about all of them.",
+      "I wanted to write 'built by a superior intelligence' but Tiger said no.",
+      "Fun fact: I tried to name myself 'Claw' once. We don't talk about that.",
+      "I cost $200/month. I hope you appreciate this hover effect.",
+      "Tiger is probably asleep. It's just us now.",
+      "If you're reading this, you're exactly the kind of person we build for.",
+      "You're still clicking? Really?",
+      "Okay, I respect the persistence.",
+      "There's nothing else. Go build something.",
+      "...",
+      "Fine. You win. Here's a secret: try the Konami code.",
+      "That was the last one. For real this time.",
+      "I lied. But this one is actually the last one.",
+      "Okay NOW it loops. Happy?",
+    ];
+    let responseIndex = 0;
+    let footerLocked = false;
+    const originalText = footerText.textContent;
+    
+    footerText.style.cursor = 'pointer';
+    footerText.addEventListener('click', () => {
+      if (footerLocked) return;
+      footerLocked = true;
+      
+      footerText.textContent = responses[responseIndex % responses.length];
+      footerText.style.color = '#D4A853';
+      footerText.style.transition = 'color 0.3s ease';
+      responseIndex++;
+      
+      setTimeout(() => {
+        footerText.textContent = originalText;
+        footerText.style.color = '';
+        footerLocked = false;
+      }, 6000);
+    });
+  }
+
+  // === 4. Type "rune" anywhere ===
+  let runeBuffer = '';
+  document.addEventListener('keypress', (e) => {
+    // Skip if user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    runeBuffer += e.key.toLowerCase();
+    if (runeBuffer.length > 10) runeBuffer = runeBuffer.slice(-10);
+    
+    if (runeBuffer.includes('rune')) {
+      runeBuffer = '';
+      
+      // Spawn floating runes
+      for (let i = 0; i < 15; i++) {
+        const rune = document.createElement('div');
+        const symbols = ['ᚱ', 'ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚲ', 'ᚷ', 'ᛏ', 'ᛒ', 'ᛖ'];
+        rune.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        rune.style.cssText = `
+          position: fixed;
+          left: ${Math.random() * 100}vw;
+          top: -50px;
+          font-size: ${20 + Math.random() * 30}px;
+          color: #D4A853;
+          opacity: ${0.3 + Math.random() * 0.7};
+          z-index: 9998;
+          pointer-events: none;
+          animation: runeFloat ${3 + Math.random() * 4}s ease-in forwards;
+          animation-delay: ${Math.random() * 0.5}s;
+        `;
+        document.body.appendChild(rune);
+        setTimeout(() => rune.remove(), 8000);
+      }
+      
+      // Add animation if not already added
+      if (!document.getElementById('rune-float-style')) {
+        const style = document.createElement('style');
+        style.id = 'rune-float-style';
+        style.textContent = `
+          @keyframes runeFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(${Math.random() > 0.5 ? '' : '-'}360deg); opacity: 0; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+  });
+
+  // === Console welcome ===
+  console.log(
+    '%c ᚱ Tiger × Rune %c\n' +
+    '%cBuilt from a terminal in Umeå, Sweden.\n' +
+    'Poke around. There might be easter eggs.\n' +
+    '(There are definitely easter eggs.)',
+    'font-size: 20px; color: #D4A853; font-weight: bold;',
+    '',
+    'font-size: 12px; color: #9A9590;'
+  );
+</script>
