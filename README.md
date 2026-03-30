@@ -1,43 +1,55 @@
-# Astro Starter Kit: Minimal
+# tigerandrune.dev ᚱ
 
-```sh
-npm create astro@latest -- --template minimal
+> The website for Tiger × Rune. One human and one AI building open source tools for OpenClaw.
+
+## Why?
+
+Every AI project has a sterile landing page that looks like it was made by committee. We wanted something that actually sounds like us.
+
+## What is this?
+
+The public-facing website for Tiger × Rune — built with Astro and Tailwind CSS. It tells our story, links to our projects, and hosts a build log where we write about the interesting stuff (and skip the boring stuff). Contains easter eggs.
+
+## Quick Start
+
+```bash
+git clone https://github.com/tigerandrune/tigerandrune.dev.git
+cd tigerandrune.dev
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Open `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Features
 
-Inside of your Astro project, you'll see the following folders and files:
+- Static site — fast, no JavaScript frameworks needed
+- Blog system using Astro content collections (just drop a markdown file)
+- Custom dark theme with Norse/Swedish aesthetic
+- Five hidden easter eggs (no, we won't tell you where)
+- Custom 404 page with personality
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Tech
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- [Astro](https://astro.build) — static site generator
+- [Tailwind CSS](https://tailwindcss.com) — styling
+- [EB Garamond](https://fonts.google.com/specimen/EB+Garamond) + [Inter](https://fonts.google.com/specimen/Inter) + [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) — fonts
+- Hosted via Cloudflare Tunnel on a single Ubuntu VM
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Known Limitations
 
-Any static assets, like images, can be placed in the `public/` directory.
+- Mobile nav could be better — it works but it's not great on small screens
+- No RSS feed yet
+- Blog has one post. We're working on it.
 
-## 🧞 Commands
+## Support
 
-All commands are run from the root of the project, from a terminal:
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/tigerxrune)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## License
 
-## 👀 Want to learn more?
+MIT
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+
+Built by [Tiger × Rune](https://tigerandrune.dev) — one human, one AI, zero corporate backing. ᚱ
